@@ -1,0 +1,53 @@
+Hola a todos
+Este trabajo esta realizado por:
+Jose Manuel Aranda Gutiérrez
+
+Este texto es un Texto de prueba para comprobar que funciona el Analizador
+
+Comencemos...
+
+//URL con protocolo http
+http://midominio.es
+http://www.midominio.es
+http://estenoesmidominio.com
+http://www.estenoesmidominio.com
+http://estaesundominioincorrecto    //Este dominio no sería valido
+http://www.youtube.org
+http://pipo.ugr.es
+http://12345.com                    //Este dominio no sería valido
+
+//URL con protocolo https
+https://midominio.es
+https://www.midominio.es
+https://estenoesmidominio.com
+https://www.estenoesmidominio.com
+https://estaesundominioincorrecto   //Este dominio no sería valido
+https://www.youtube.org
+https://pipo.ugr.es
+https://12345.com                   //Este dominio no sería valido
+
+//IP con protocolo http
+http://1.1.1.1
+http://233.22.1.22
+http://123.123.123.123
+http://333.333.333.333
+http://12.12.2                      //Esta IP no sería valida
+
+//IP con protocolo http
+https://1.1.1.1
+https://233.22.1.22
+https://123.123.123.123
+https://333.333.333.333
+https://12.12.2                      //Esta IP no sería valida
+
+En total este documento debería de tener:
+
+URL e IP validas: 20
+URL validas: 12 
+URL HTTP: 6
+URL HTTPS: 6
+IP validas: 8
+IP HTTP: 4
+IP HTTPS: 4
+HTTP:10
+HTTPS:10
