@@ -3,48 +3,48 @@ Hola a todos
 Este texto es un Texto de prueba para comprobar que funciona el Analizador
 
 
-//URL con protocolo http
+//URL con protocolo http:
 http://midominio.es
 http://www.midominio.es
 http://estenoesmidominio.com
-http://www.estenoesmidominio.com
-http://estaesundominioincorrecto    
+Adios http://www.estenoesmidominio.com hola
+http://estaesundominioincorrecto                            //Este diminio no sería valido
 http://www.youtube.org
-http://pipo.ugr.es                  //Este dominio no sería válido
-http://12345.com                    //Este dominio no sería válido
+http://pipo.ugr.es                                          //Este dominio no sería válido
+http://12345.com                                            //Este dominio no sería válido
 
 //URL con protocolo https
-https://midominio.es
+https://midominio.es                https://midominio.es    //Dos en una misma linea
 https://www.midominio.es
 https://estenoesmidominio.com
 https://www.estenoesmidominio.com
-https://estaesundominioincorrecto   //Este dominio no sería válido
+https://estaesundominioincorrecto                           //Este dominio no sería válido
 https://www.youtube.org
-https://pipo.ugr.es                 //Este dominio no sería válido
-https://12345.com                   //Este dominio no sería válido
+https://pipo.ugr.es                                         //Este dominio no sería válido
+https://12345.com                                           //Este dominio no sería válido
 
 //IP con protocolo http
 http://1.1.1.1
 http://233.22.1.22
 http://123.123.123.123
-http://333.333.333.333              //Esta IP no sería válida
-http://12.12.2                      //Esta IP no sería válida
+http://333.333.333.333                                      //Esta IP no sería válida
+http://12.12.2                                              //Esta IP no sería válida
 
 //IP con protocolo http
 https://1.1.1.1
 https://233.22.1.22
 https://123.123.123.123
-https://333.333.333.333              //Esta IP no sería válida
-https://12.12.2                      //Esta IP no sería válida
+https://333.333.333.333                                     //Esta IP no sería válida
+https://12.12.2                                             //Esta IP no sería válida
 
 En total este documento debería de tener:
 
-URL e IP validas: 16
+URL e IP validas: 17
 URL validas: 10
-URL HTTP: 5
+URL HTTP: 6
 URL HTTPS: 5
 IP validas: 6
 IP HTTP: 3
 IP HTTPS: 3
-HTTP:8
+HTTP:9
 HTTPS:8
