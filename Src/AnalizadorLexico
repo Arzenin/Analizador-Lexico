@@ -1,12 +1,12 @@
-ip_seguro               {protocolo_seguro}{ipv4}
-url_dominio_seguro      {protocolo_seguro}{dominio}
-url_dominio_inseguro    {protocolo_inseguro}{dominio}
-ip_inseguro             {protocolo_inseguro}{ipv4}
 protocolo_seguro        ("https://")
 protocolo_inseguro      ("http://")
 dominio                 (("www"\.)?[a-zA-Z]+[\.]("com"|"es"|"org"|"net"|"edu"|"gov"))
 ipv4                    ({s_ipv4}\.{s_ipv4}\.{s_ipv4}\.{s_ipv4})
 s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+ip_seguro               {protocolo_seguro}{ipv4}
+url_dominio_seguro      {protocolo_seguro}{dominio}
+url_dominio_inseguro    {protocolo_inseguro}{dominio}
+ip_inseguro             {protocolo_inseguro}{ipv4}
 
 
 %{
