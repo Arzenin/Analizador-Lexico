@@ -8,12 +8,12 @@ En este repositorio podremos encontrar el analizador léxico realizado para las 
    - [Src](Src/)
    - [Test](Test/)
    - [Result](Result/)
-- [Instalación de la Herramienta](#instalación-de-la-herramienta)
-   - [Gcc](#gcc)
-   - [Flex](#flex)
 - [Descarga del Repositorio](#descarga-del-repositorio)
    - [Instalación de Git](#instalación-de-git)
    - [Clonar un Repositorio](#clonar-un-repositorio)
+- [Instalación de la Herramienta](#instalación-de-la-herramienta)
+   - [Gcc](#gcc)
+   - [Flex](#flex)
 - [Explicación del Código](#explicación-del-código)
 
 ## Estructura del Repositorio
@@ -41,25 +41,6 @@ Este directorio nos será de gran utilidad para poder comprender el formato de l
 
 [Volver al Índice](#índice)
 
-## Instalación de la Herramienta
-
-En este caso explicaré la instalación de las herramientas en el entorno de programación que se ha utilizado para desarrollarla, es decir, una intalación en la distribución de __Ubuntu 22.04.3 LTS__ utilizando el compilador [gcc](#gcc) y [flex](#flex), dicho esto en los dos siguientes apartados se procederá a explicar la instalación de cada una de las herramientas.
-
-### Gcc
-1. Abrimos la terminal
-2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
-3. Descargaremos los paquetes básicos donde van incluido gcc y todas sus librerías con el comando `sudo apt install build-essential`
-4. Comprobaremos que se ha descargadado correctamente con el comando `gcc --version`
-
-### Flex
-1. Abrimos la terminal
-2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
-3. Ejecutamos el comando `sudo apt-get install flex`
-4. Ejecuratemos `flex --version` pasa asegurarnos de que todo se ha instalado correctamente
-
-
-[Volver al índice](#índice)
-
 ## Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
 
@@ -79,6 +60,24 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 
 [Volver al índice](#índice)
 
+## Instalación de la Herramienta
+
+En este caso explicaré la instalación de las herramientas en el entorno de programación que se ha utilizado para desarrollarla, es decir, una intalación en la distribución de __Ubuntu 22.04.3 LTS__ utilizando el compilador [gcc](#gcc) y [flex](#flex), dicho esto en los dos siguientes apartados se procederá a explicar la instalación de cada una de las herramientas.
+
+### Gcc
+1. Abrimos la terminal
+2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
+3. Descargaremos los paquetes básicos donde van incluido gcc y todas sus librerías con el comando `sudo apt install build-essential`
+4. Comprobaremos que se ha descargadado correctamente con el comando `gcc --version`
+
+### Flex
+1. Abrimos la terminal
+2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
+3. Ejecutamos el comando `sudo apt-get install flex`
+4. Ejecuratemos `flex --version` pasa asegurarnos de que todo se ha instalado correctamente
+
+
+[Volver al índice](#índice)
 
 ## Explicación del Código
 
