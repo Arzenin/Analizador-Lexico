@@ -10,12 +10,12 @@ En este repositorio podremos encontrar el analizador léxico realizado para las 
       1. [Src](Src/#211src)
       2. [Test](Test/#212test)
       3. [Result](Result/#213result)
-   2. [Descarga del Repositorio](#descarga-del-repositorio)
-      1. [Instalación de Git](#instalación-de-git)
-      2. [Clonar un Repositorio](#clonar-un-repositorio)
-3. [Instalación de la Herramienta](#instalación-de-la-herramienta)
-   1. [Gcc](#gcc)
-   2. [Flex](#flex)
+   2. [Descarga del Repositorio](#22-descarga-del-repositorio)
+      1. [Instalación de Git](#221-instalación-de-git)
+      2. [Clonar un Repositorio](#222-clonar-un-repositorio)
+3. [Instalación de la Herramienta](#3-instalación-de-la-herramienta)
+   1. [Gcc](#31-gcc)
+   2. [Flex](#32-flex)
 4. [Explicación del Código](#explicación-del-código)
 
 # 2. Github
@@ -46,16 +46,16 @@ Este directorio nos será de gran utilidad para poder comprender el formato de l
 
 [Volver al Índice](#índice)
 
-## Descarga del Repositorio
+## 2.2 Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
 
-### Instalación de Git
+### 2.2.1 Instalación de Git
 1. Deberemos abrir el terminal
 2. Nos aseguraremos de tener todas las dependencias y paquetes actualizados por medio de `sudo apt update` y `sudo apt upgrade`
 3. Tras esto ejecutaremos `apt-get install git` por el cual instalaremos git junto a sus dependencias
 4. Por último como en el resto de instalaciones ejecutaremos `git --version` para asegurarnos que se ha instalado todo correctamente
    
-### Clonar un Repositorio
+### 2.2.2 Clonar un Repositorio
 Una vez instalado Git deberemos de crear un directorio personalmente recomiendo que creemos uno con el siguiente esquema `/Documents/github` sin embargo esto esto no es obligatorio.
 
 1. Nos dirigiremos al directorio en el que queramos clonar el repositorio
@@ -65,17 +65,17 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 
 [Volver al índice](#índice)
 
-# Instalación de la Herramienta
+# 3. Instalación de la Herramienta
 
 En este caso explicaré la instalación de las herramientas en el entorno de programación que se ha utilizado para desarrollarla, es decir, una intalación en la distribución de __Ubuntu 22.04.3 LTS__ utilizando el compilador [gcc](#gcc) y [flex](#flex), dicho esto en los dos siguientes apartados se procederá a explicar la instalación de cada una de las herramientas.
 
-### Gcc
+### 3.1 Gcc
 1. Abrimos la terminal
 2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
 3. Descargaremos los paquetes básicos donde van incluido gcc y todas sus librerías con el comando `sudo apt install build-essential`
 4. Comprobaremos que se ha descargadado correctamente con el comando `gcc --version`
 
-### Flex
+### 3.2 Flex
 1. Abrimos la terminal
 2. Comprobamos que todas las dependencias esten actualizadas y en caso de no ser así acutalizamos con `sudo apt update` y `sudo apt upgrade`
 3. Ejecutamos el comando `sudo apt-get install flex`
