@@ -38,9 +38,10 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
       2. [Acciones](#512-acciones)
       3. [Main](#513-main)
       4. [Código completo](#514-código-completo)
-   3. [Estructura del Test](#52-explicación-del-test)
-   4. [Estructura del Resultado](#53-explicación-del-resultado)
-   5. [Ejeccución del Código](#54-ejecución-del-código)
+   2. [Explicación del Test](#52-explicación-del-test)
+      1. [Archivo de Test Completo](#521-archivo-de-test-completo)
+   3. [Estructura del Resultado](#53-explicación-del-resultado)
+   4. [Ejeccución del Código](#54-ejecución-del-código)
    
    
 # 1. Introducción y motivación 
@@ -103,7 +104,7 @@ __Se recomienda encarecidamente su lectura__ ya que al final de este se nos indi
 
 
 ### 3.1.3 Result
-En el directorio __[Result](Result/)__se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
+En el directorio __[Result](Result/)__ se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
 
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
@@ -746,13 +747,66 @@ int main(){
 
 
 [Volver al índice](#0-índice)
-```c
-```
-```c
-```
-```c
-```
 
-## 5.2 Estructura del Test
+## 5.2 Explicación del Test
+En este apartado explicaremos brevemente el fichero [entrada.txt](Test/entrada.txt) el cual podremos encontrar en el 
+directorio [Test](Test/). 
+
+
+Las primeras 6 líneas siven para comprobar que ignora todo aquello que no sea del formato especificado, incluyendo 
+líneas en blanco.
+```c
+Hola a todos
+
+Este texto es un Texto de prueba para comprobar que funciona el Analizador
+
+
+//URL con protocolo http:
+```
+Tras esto se van especificando por clasificación todas las URL e IP, para explicar este fragmento nos centraremos
+únicamente en una de ellas, la que va de la línea  16 a la 24
+```c
+//URL con protocolo https
+https://midominio.es                https://midominio.es    //Dos en una misma linea
+https://www.midominio.es
+https://estenoesmidominio.com
+https://www.estenoesmidominio.com
+https://estaesundominioincorrecto                           //Este dominio no sería válido
+https://www.youtube.org
+https://pipo.ugr.es                                         //Este dominio no sería válido
+https://12345.com                                           //Este dominio no sería válido
+```
+El analizador deberá de aceptar tódas las líneas que no tengan ningun comentario comenzando por `//Comentario` a 
+excepción de la línea en la que pone `//Dos en una misma línea` ya que esta deberá de reconocer 2 URL en una misma
+línea sin ningún problema.
+
+
+Lo último que quedaría por comentar serían de la línea 42 a la 50 que serían los resultados que nos debería de 
+proporcionar el conteo de las diferentes clasificaciones obtenidas
+
+```c
+En total este documento debería de tener:
+
+URL e IP validas: 17
+URL validas: 10
+URL HTTP: 6
+URL HTTPS: 5
+IP validas: 6
+IP HTTP: 3
+IP HTTPS: 3
+HTTP:9
+HTTPS:8
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+### 5.2.1 Archivo de Test Completo
 ## 5.3 Estructura del Resultado
 ## 5.4 Ejeccución del Código
