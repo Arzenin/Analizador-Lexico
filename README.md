@@ -2,38 +2,43 @@
 
 En este repositorio podremos encontrar el analizador léxico realizado para las practicas de la asignatura de MC.
 
-## Índice
-- [Índice](#índice)
-- [Estructura del Repositorio](#estructura-del-repositorio)
-   - [Src](Src/)
-   - [Test](Test/)
-   - [Result](Result/)
-- [Descarga del Repositorio](#descarga-del-repositorio)
-   - [Instalación de Git](#instalación-de-git)
-   - [Clonar un Repositorio](#clonar-un-repositorio)
-- [Instalación de la Herramienta](#instalación-de-la-herramienta)
-   - [Gcc](#gcc)
-   - [Flex](#flex)
-- [Explicación del Código](#explicación-del-código)
+# 1. Índice
 
-## Estructura del Repositorio
+1. [Índice](#1-índice)
+2. [Github](#2-github)
+   1. [Estructura del Repositorio](#21-estructura-del-repositorio)
+      1. [Src](Src/#211src)
+      2. [Test](Test/#212test)
+      3. [Result](Result/#213result)
+   2. [Descarga del Repositorio](#descarga-del-repositorio)
+      1. [Instalación de Git](#instalación-de-git)
+      2. [Clonar un Repositorio](#clonar-un-repositorio)
+3. [Instalación de la Herramienta](#instalación-de-la-herramienta)
+   1. [Gcc](#gcc)
+   2. [Flex](#flex)
+4. [Explicación del Código](#explicación-del-código)
+
+# 2. Github
+En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta su descarga
+
+## 2.1 Estructura del Repositorio
 
 El repositorio esta compuesto por 3 directorios:
 
-### Src
+### 2.1.1 Src
 Este directorio contiene en si el analizador léxico por el cual obtendremos los requisitos explicados en la sección anterior, el nombre del archivo es [AnalizadorLexico](Src/AnalizadorLexico)
 
 Más adelante en el apartado [explicación del código](#explicación-del-código) se explicará en mayor profundidad el funcionamiento del mismo
 
 
-### Test
+### 2.1.2 Test
 En este directorio podremos encontrar un fichero llamado [entrada.txt](Test/entrada.txt) por el cual podremos comprobar el correcto funcionamiento del programa.
 
 
 __Se recomienda encarecidamente su lectura__ ya que al final de este se nos indican los resultados esperados por parte del programa.
 
 
-### Result
+### 2.1.3 Result
 En el directorio result se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
 
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
@@ -44,13 +49,13 @@ Este directorio nos será de gran utilidad para poder comprender el formato de l
 ## Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
 
-# Instalación de Git
+### Instalación de Git
 1. Deberemos abrir el terminal
 2. Nos aseguraremos de tener todas las dependencias y paquetes actualizados por medio de `sudo apt update` y `sudo apt upgrade`
 3. Tras esto ejecutaremos `apt-get install git` por el cual instalaremos git junto a sus dependencias
 4. Por último como en el resto de instalaciones ejecutaremos `git --version` para asegurarnos que se ha instalado todo correctamente
    
-# Clonar un Repositorio
+### Clonar un Repositorio
 Una vez instalado Git deberemos de crear un directorio personalmente recomiendo que creemos uno con el siguiente esquema `/Documents/github` sin embargo esto esto no es obligatorio.
 
 1. Nos dirigiremos al directorio en el que queramos clonar el repositorio
@@ -60,7 +65,7 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 
 [Volver al índice](#índice)
 
-## Instalación de la Herramienta
+# Instalación de la Herramienta
 
 En este caso explicaré la instalación de las herramientas en el entorno de programación que se ha utilizado para desarrollarla, es decir, una intalación en la distribución de __Ubuntu 22.04.3 LTS__ utilizando el compilador [gcc](#gcc) y [flex](#flex), dicho esto en los dos siguientes apartados se procederá a explicar la instalación de cada una de las herramientas.
 
