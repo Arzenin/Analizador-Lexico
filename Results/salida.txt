@@ -1,7 +1,7 @@
 Analisis del Prompt Introducido:
-Num lineas:50	Num Palabras:11	Num Caracteres:947
-Num URL/IP: 16
-Num Protocolo HTTP: 8	Num Protocolo HTTPS: 8	Num IPV4: 6	Num URL: 10
+Num lineas:50	Num Palabras:259	Num Caracteres:758
+Num URL/IP: 17
+Num Protocolo HTTP: 8	Num Protocolo HTTPS: 9	Num IPV4: 6	Num URL: 11
 
 URL e IP con protocolo HTTP:
 
@@ -16,6 +16,7 @@ URL e IP con protocolo HTTP:
 
 URL e IP con protocolo HTTPS:
 
+	Num line: 17 	URL: https://midominio.es
 	Num line: 17 	URL: https://midominio.es
 	Num line: 18 	URL: https://www.midominio.es
 	Num line: 19 	URL: https://estenoesmidominio.com
@@ -41,6 +42,7 @@ DIRECCION URL:
 	Num line: 9 	URL: http://estenoesmidominio.com
 	Num line: 10 	URL: http://www.estenoesmidominio.com
 	Num line: 12 	URL: http://www.youtube.org
+	Num line: 17 	URL: https://midominio.es
 	Num line: 17 	URL: https://midominio.es
 	Num line: 18 	URL: https://www.midominio.es
 	Num line: 19 	URL: https://estenoesmidominio.com
