@@ -13,7 +13,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-    #include <stdbool.h>
     int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
     int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
     char* ip_s = NULL;
