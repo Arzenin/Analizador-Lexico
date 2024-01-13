@@ -25,7 +25,7 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
    1. [Estructura del Repositorio](#31-estructura-del-repositorio)
       1. [Src](#311-src)
       2. [Test](#312-test)
-      3. [Result](#313-result)
+      3. [Results](#313-results)
    2. [Descarga del Repositorio](#32-descarga-del-repositorio)
       1. [Instalación de Git](#321-instalación-de-git)
       2. [Clonar un Repositorio](#322-clonar-un-repositorio)
@@ -103,8 +103,8 @@ En el directorio __[Test](Test/)__ encontraremos podremos encontrar un fichero l
 __Se recomienda encarecidamente su lectura__ ya que al final de este se nos indican los resultados esperados por parte del programa.
 
 
-### 3.1.3 Result
-En el directorio __[Result](Result/)__ se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
+### 3.1.3 Results
+En el directorio __[Results](Results/)__ se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
 
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
@@ -363,7 +363,7 @@ hacer el caso de querer realizar las modificaciones para que únicamente se dete
 
 La necesidad de eliminar caracteres es que a la hora de la salida de los resultados obtenidos, en caso de no eliminar
 caracteres como los saltos de línea, espacios en blanco, puntos, comas... etc nos aparecerían dentro del fichero 
-[salida.txt](Result/salida.txt).
+[salida.txt](Results/salida.txt).
 ```c
 void elimina_car_sobrantes(char* vector_car){
     int longitud = strlen(vector_car);
@@ -755,7 +755,7 @@ directorio [Test](Test/).
 
 Las primeras 6 líneas siven para comprobar que ignora todo aquello que no sea del formato especificado, incluyendo 
 líneas en blanco.
-```c
+```html
 Hola a todos
 
 Este texto es un Texto de prueba para comprobar que funciona el Analizador
@@ -765,7 +765,7 @@ Este texto es un Texto de prueba para comprobar que funciona el Analizador
 ```
 Tras esto se van especificando por clasificación todas las URL e IP, para explicar este fragmento nos centraremos
 únicamente en una de ellas, la que va de la línea  16 a la 24
-```c
+```html
 //URL con protocolo https
 https://midominio.es                https://midominio.es    //Dos en una misma linea
 https://www.midominio.es
@@ -777,14 +777,14 @@ https://pipo.ugr.es                                         //Este dominio no se
 https://12345.com                                           //Este dominio no sería válido
 ```
 El analizador deberá de aceptar tódas las líneas que no tengan ningun comentario comenzando por `//Comentario` a 
-excepción de la línea en la que pone `//Dos en una misma línea` ya que esta deberá de reconocer 2 URL en una misma
+excepción de la línea `//Dos en una misma línea` ya que esta deberá de reconocer 2 URL en una misma
 línea sin ningún problema.
 
 
 Lo último que quedaría por comentar serían de la línea 42 a la 50 que serían los resultados que nos debería de 
 proporcionar el conteo de las diferentes clasificaciones obtenidas
 
-```c
+```html
 En total este documento debería de tener:
 
 URL e IP validas: 17
@@ -797,16 +797,141 @@ IP HTTPS: 3
 HTTP:9
 HTTPS:8
 ```
-```c
-```
-```c
-```
-```c
-```
-```c
-```
-```c
-```
+
+
+[Volver al índice](#0-índice)
+
 ### 5.2.1 Archivo de Test Completo
+En esta sección se muestra el fichero completo [entrada.txt](Test/entrada.txt) el cual podremos encontrar en el 
+directorio [Test](Test/). 
+
+```html
+Hola a todos
+
+Este texto es un Texto de prueba para comprobar que funciona el Analizador
+
+
+//URL con protocolo http:
+http://midominio.es
+http://www.midominio.es
+http://estenoesmidominio.com
+Adios http://www.estenoesmidominio.com hola
+http://estaesundominioincorrecto                            //Este diminio no sería valido
+http://www.youtube.org
+http://pipo.ugr.es                                          //Este dominio no sería válido
+http://12345.com                                            //Este dominio no sería válido
+
+//URL con protocolo https
+https://midominio.es                https://midominio.es    //Dos en una misma linea
+https://www.midominio.es
+https://estenoesmidominio.com
+https://www.estenoesmidominio.com
+https://estaesundominioincorrecto                           //Este dominio no sería válido
+https://www.youtube.org
+https://pipo.ugr.es                                         //Este dominio no sería válido
+https://12345.com                                           //Este dominio no sería válido
+
+//IP con protocolo http
+http://1.1.1.1
+http://233.22.1.22
+http://123.123.123.123
+http://333.333.333.333                                      //Esta IP no sería válida
+http://12.12.2                                              //Esta IP no sería válida
+
+//IP con protocolo http
+https://1.1.1.1
+https://233.22.1.22
+https://123.123.123.123
+https://333.333.333.333                                     //Esta IP no sería válida
+https://12.12.2                                             //Esta IP no sería válida
+
+En total este documento debería de tener:
+
+URL e IP validas: 17
+URL validas: 10
+URL HTTP: 6
+URL HTTPS: 5
+IP validas: 6
+IP HTTP: 3
+IP HTTPS: 3
+HTTP:9
+HTTPS:8
+```
 ## 5.3 Estructura del Resultado
+Respecto a explicaciones, lo único que quedaría por aclarar sería el formato de la salída al ejecutar el programa, para ello primero mostraré el código completo y explicaré las dos secciones en las que se divide.
+
+
+Este ejemplo de salida podemos encontrarlo en el fichero [salida.txt](Results/salida.txt) ubicado en el directorio [Results](Results/)
+
+```html
+Analisis del Prompt Introducido:
+Num lineas:50	Num Palabras:321	Num Caracteres:1758
+Num URL/IP: 17
+Num Protocolo HTTP: 8	Num Protocolo HTTPS: 9	Num IPV4: 6	Num URL: 11
+
+URL e IP con protocolo HTTP:
+
+	Num line: 7 	URL: http://midominio.es
+	Num line: 8 	URL: http://www.midominio.es
+	Num line: 9 	URL: http://estenoesmidominio.com
+	Num line: 10 	URL: http://www.estenoesmidominio.com
+	Num line: 12 	URL: http://www.youtube.org
+	Num line: 27 	IP:  http://1.1.1.1
+	Num line: 28 	IP:  http://233.22.1.22
+	Num line: 29 	IP:  http://123.123.123.123
+
+URL e IP con protocolo HTTPS:
+
+	Num line: 17 	URL: https://midominio.es
+	Num line: 17 	URL: https://midominio.es
+	Num line: 18 	URL: https://www.midominio.es
+	Num line: 19 	URL: https://estenoesmidominio.com
+	Num line: 20 	URL: https://www.estenoesmidominio.com
+	Num line: 22 	URL: https://www.youtube.org
+	Num line: 34 	IP:  https://1.1.1.1
+	Num line: 35 	IP:  https://233.22.1.22
+	Num line: 36 	IP:  https://123.123.123.123
+
+DIRECCION IP:
+
+	Num line: 27 	IP:  http://1.1.1.1
+	Num line: 28 	IP:  http://233.22.1.22
+	Num line: 29 	IP:  http://123.123.123.123
+	Num line: 34 	IP:  https://1.1.1.1
+	Num line: 35 	IP:  https://233.22.1.22
+	Num line: 36 	IP:  https://123.123.123.123
+
+DIRECCION URL:
+
+	Num line: 7 	URL: http://midominio.es
+	Num line: 8 	URL: http://www.midominio.es
+	Num line: 9 	URL: http://estenoesmidominio.com
+	Num line: 10 	URL: http://www.estenoesmidominio.com
+	Num line: 12 	URL: http://www.youtube.org
+	Num line: 17 	URL: https://midominio.es
+	Num line: 17 	URL: https://midominio.es
+	Num line: 18 	URL: https://www.midominio.es
+	Num line: 19 	URL: https://estenoesmidominio.com
+	Num line: 20 	URL: https://www.estenoesmidominio.com
+	Num line: 22 	URL: https://www.youtube.org
+```
+__De la línea 1 a la 4__ sirven para mostrar el conteo realizado durante la ejecución del analizador, desde el 
+número de líneas hasta el numero de IPV4 encontradas.
+
+__De la línea 5 en adelante__ se nos mostrarán de forma clasificada las IP y URL encontradas primero por protocolo
+HTTP o HTTPS y tras esto se nos mostrarán por separado las IP y las URL obtenidas.
+
+
 ## 5.4 Ejeccución del Código
+Lo único que quedaría por explicar serían los comandos para poder ejecutar el analizador,en  esta sección se dará
+por sentado que se ejecutará desde una copia del repositorio bajada en una máquina con la disto __Ubuntu__.
+1. `cd Src/`
+2. `flex AnalizadorLexico`
+  1. Se nos habrá generado un fichero llamado `lex.yy.c`
+3. Compilamos el fichero con el comando `gcc lex.yy.c -lfl`
+4.  Tras esto ejecutaremos a.out
+  1. En caso de querer hacerlo sin un fichero de entrada ejecutaremos `./a.out`
+     1. Tras esto escribiremos todas las IP o URL en el formato especificado o no
+     2. Pulsamos `ctrl+d` y deberíamos de obtener la salida correspondiente
+  2. En caso de querer hacerlo sin un fichero de entrada ejecutaremos `./a.out < ../Test/entrada.txt > salida.txt`
+     1. Debemos de obtener el mismo resultado que `Results/salida.txt`
