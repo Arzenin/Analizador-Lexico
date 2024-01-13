@@ -1,12 +1,13 @@
-protocolo_inseguro      ("http://"|" http://")
-protocolo_seguro        ("https://"|" http://")
-dominio                 (("www.")?[a-zA-Z]+\.("com"|"es"|"org"|"net"|"edu"|"gov"))
-s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+ip_seguro               {protocolo_seguro}{ipv4}
+url_dominio_seguro      {protocolo_seguro}{dominio}
+url_dominio_inseguro    {protocolo_inseguro}{dominio}
+ip_inseguro             {protocolo_inseguro}{ipv4}
+protocolo_seguro        ("https://")
+protocolo_inseguro      ("http://")
+dominio                 (("www"\.)?[a-zA-Z]+[\.]("com"|"es"|"org"|"net"|"edu"|"gov"))
 ipv4                    ({s_ipv4}\.{s_ipv4}\.{s_ipv4}\.{s_ipv4})
-url_dominio_seguro      ({protocolo_seguro}{dominio})
-url_dominio_inseguro    ({protocolo_inseguro}{dominio})
-ip_seguro               ({protocolo_seguro}{ipv4})
-ip_inseguro             ({protocolo_inseguro}{ipv4})
+s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+
 
 %{
     #include <stdio.h>
@@ -20,12 +21,40 @@ ip_inseguro             ({protocolo_inseguro}{ipv4})
     char* dom_s = NULL;
     char* dom_u = NULL;
 
+    void elimina_car_sobrantes(char* vector_car){
+        int longitud = strlen(vector_car);
+        if(vector_car[0]==' '||vector_car[0]=='\n'||vector_car[0]=='.'|vector_car[0]==','|vector_car[0]=='\b'){
+            if(vector_car[0]=='\n'){
+                numline++;
+            }
+            else if(vector_car[0]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[i] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+            longitud = longitud-1;
+        }
+        if(vector_car[longitud-1]==' '||vector_car[longitud-1]=='\n'||vector_car[longitud-1]=='.'|vector_car[longitud-1]==','|vector_car[longitud-1]=='\b'){
+            if(vector_car[longitud-1]=='\n'){
+                numline++;
+            }
+            else if(vector_car[longitud-1]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[longitud-1] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+        }
+    }
 %}
 
 %%
 \n                      {numline++;}
 
-E                       {numword++;}
+[ ]                     {numword++;}
 
 .                       {numchar++;}
 
@@ -33,6 +62,7 @@ E                       {numword++;}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tIP:  ",numline);
                         ip_u = realloc(ip_u,strlen(ip_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        elimina_car_sobrantes(yytext);
                         strcat(ip_u,"\n");
                         strcat(ip_u,"\t");
                         strcat(ip_u,numer);
@@ -43,6 +73,7 @@ E                       {numword++;}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tIP:  ", numline);
                         ip_s = realloc(ip_s,strlen(ip_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        elimina_car_sobrantes(yytext);
                         strcat(ip_s,"\n");
                         strcat(ip_s,"\t");
                         strcat(ip_s,numer);
@@ -53,6 +84,7 @@ E                       {numword++;}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tURL: ", numline);
                         dom_u = realloc(dom_u,strlen(dom_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        elimina_car_sobrantes(yytext);
                         strcat(dom_u,"\n");
                         strcat(dom_u,"\t");
                         strcat(dom_u,numer);
@@ -63,13 +95,12 @@ E                       {numword++;}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tURL: ", numline);
                         dom_s = realloc(dom_s,strlen(dom_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        elimina_car_sobrantes(yytext);
                         strcat(dom_s,"\n");
                         strcat(dom_s,"\t");
                         strcat(dom_s,numer);
                         strcat(dom_s,yytext);
                         }
-
-
 
 %%
 
