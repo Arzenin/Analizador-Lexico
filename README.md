@@ -26,6 +26,7 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
       1. [Src](#311-src)
       2. [Test](#312-test)
       3. [Results](#313-results)
+      4. [Doc](#314-doc)
    2. [Descarga del Repositorio](#32-descarga-del-repositorio)
       1. [Instalación de Git](#321-instalación-de-git)
       2. [Clonar un Repositorio](#322-clonar-un-repositorio)
@@ -108,6 +109,9 @@ En el directorio __[Results](Results/)__ se almacena una muestra del resultado q
 
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
+
+### 3.1.4 Doc
+En el directorio __[Doc](Doc/)__ se almacena el archivo [documentacion.pdf](Doc/documentacion.pdf) el cual correspondería al fichero [README.md](README.md) en formato pdf para así poder obtener la documentación y poder leerla desde cualquier medio.
 
 ## 3.2 Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
