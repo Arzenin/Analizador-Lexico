@@ -62,7 +62,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tIP:  ",numline);
                         ip_u = realloc(ip_u,strlen(ip_u) + strlen(yytext) + strlen((char*)numer) + 3);
-                        elimina_car_sobrantes(yytext);
                         strcat(ip_u,"\n");
                         strcat(ip_u,"\t");
                         strcat(ip_u,numer);
@@ -73,7 +72,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tIP:  ", numline);
                         ip_s = realloc(ip_s,strlen(ip_s) + strlen(yytext) + strlen((char*)numer) + 3);
-                        elimina_car_sobrantes(yytext);
                         strcat(ip_s,"\n");
                         strcat(ip_s,"\t");
                         strcat(ip_s,numer);
@@ -84,7 +82,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tURL: ", numline);
                         dom_u = realloc(dom_u,strlen(dom_u) + strlen(yytext) + strlen((char*)numer) + 3);
-                        elimina_car_sobrantes(yytext);
                         strcat(dom_u,"\n");
                         strcat(dom_u,"\t");
                         strcat(dom_u,numer);
@@ -95,7 +92,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tURL: ", numline);
                         dom_s = realloc(dom_s,strlen(dom_s) + strlen(yytext) + strlen((char*)numer) + 3);
-                        elimina_car_sobrantes(yytext);
                         strcat(dom_s,"\n");
                         strcat(dom_s,"\t");
                         strcat(dom_s,numer);
