@@ -30,7 +30,7 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
 4. [Explicación del Código](#explicación-del-código)
 
 # 2. Github
-En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta su descarga
+En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta la descarga del propio material del repositorio
 
 ## 2.1 Estructura del Repositorio
 
