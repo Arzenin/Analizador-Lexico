@@ -1,56 +1,48 @@
 Analisis del Prompt Introducido:
-Num lineas:51	Num Palabras:9	Num Caracteres:774
-Num URL/IP: 20
-Num Protocolo HTTP: 10	Num Protocolo HTTPS: 10	Num IPV4: 8	Num URL: 12
+Num lineas:50	Num Palabras:11	Num Caracteres:947
+Num URL/IP: 16
+Num Protocolo HTTP: 8	Num Protocolo HTTPS: 8	Num IPV4: 6	Num URL: 10
 
 URL e IP con protocolo HTTP:
 
-	Num line: 10 	URL: http://midominio.es
-	Num line: 11 	URL: http://www.midominio.es
-	Num line: 12 	URL: http://estenoesmidominio.com
-	Num line: 13 	URL: http://www.estenoesmidominio.com
-	Num line: 15 	URL: http://www.youtube.org
-	Num line: 16 	URL: http://pipo.ugr.es
-	Num line: 30 	IP:  http://1.1.1.1
-	Num line: 31 	IP:  http://233.22.1.22
-	Num line: 32 	IP:  http://123.123.123.123
-	Num line: 33 	IP:  http://333.333.333.333
+	Num line: 7 	URL: http://midominio.es
+	Num line: 8 	URL: http://www.midominio.es
+	Num line: 9 	URL: http://estenoesmidominio.com
+	Num line: 10 	URL: http://www.estenoesmidominio.com
+	Num line: 12 	URL: http://www.youtube.org
+	Num line: 27 	IP:  http://1.1.1.1
+	Num line: 28 	IP:  http://233.22.1.22
+	Num line: 29 	IP:  http://123.123.123.123
 
 URL e IP con protocolo HTTPS:
 
-	Num line: 20 	URL: https://midominio.es
-	Num line: 21 	URL: https://www.midominio.es
-	Num line: 22 	URL: https://estenoesmidominio.com
-	Num line: 23 	URL: https://www.estenoesmidominio.com
-	Num line: 25 	URL: https://www.youtube.org
-	Num line: 26 	URL: https://pipo.ugr.es
-	Num line: 37 	IP:  https://1.1.1.1
-	Num line: 38 	IP:  https://233.22.1.22
-	Num line: 39 	IP:  https://123.123.123.123
-	Num line: 40 	IP:  https://333.333.333.333
+	Num line: 17 	URL: https://midominio.es
+	Num line: 18 	URL: https://www.midominio.es
+	Num line: 19 	URL: https://estenoesmidominio.com
+	Num line: 20 	URL: https://www.estenoesmidominio.com
+	Num line: 22 	URL: https://www.youtube.org
+	Num line: 34 	IP:  https://1.1.1.1
+	Num line: 35 	IP:  https://233.22.1.22
+	Num line: 36 	IP:  https://123.123.123.123
 
 DIRECCION IP:
 
-	Num line: 30 	IP:  http://1.1.1.1
-	Num line: 31 	IP:  http://233.22.1.22
-	Num line: 32 	IP:  http://123.123.123.123
-	Num line: 33 	IP:  http://333.333.333.333
-	Num line: 37 	IP:  https://1.1.1.1
-	Num line: 38 	IP:  https://233.22.1.22
-	Num line: 39 	IP:  https://123.123.123.123
-	Num line: 40 	IP:  https://333.333.333.333
+	Num line: 27 	IP:  http://1.1.1.1
+	Num line: 28 	IP:  http://233.22.1.22
+	Num line: 29 	IP:  http://123.123.123.123
+	Num line: 34 	IP:  https://1.1.1.1
+	Num line: 35 	IP:  https://233.22.1.22
+	Num line: 36 	IP:  https://123.123.123.123
 
 DIRECCION URL:
 
-	Num line: 10 	URL: http://midominio.es
-	Num line: 11 	URL: http://www.midominio.es
-	Num line: 12 	URL: http://estenoesmidominio.com
-	Num line: 13 	URL: http://www.estenoesmidominio.com
-	Num line: 15 	URL: http://www.youtube.org
-	Num line: 16 	URL: http://pipo.ugr.es
-	Num line: 20 	URL: https://midominio.es
-	Num line: 21 	URL: https://www.midominio.es
-	Num line: 22 	URL: https://estenoesmidominio.com
-	Num line: 23 	URL: https://www.estenoesmidominio.com
-	Num line: 25 	URL: https://www.youtube.org
-	Num line: 26 	URL: https://pipo.ugr.es
+	Num line: 7 	URL: http://midominio.es
+	Num line: 8 	URL: http://www.midominio.es
+	Num line: 9 	URL: http://estenoesmidominio.com
+	Num line: 10 	URL: http://www.estenoesmidominio.com
+	Num line: 12 	URL: http://www.youtube.org
+	Num line: 17 	URL: https://midominio.es
+	Num line: 18 	URL: https://www.midominio.es
+	Num line: 19 	URL: https://estenoesmidominio.com
+	Num line: 20 	URL: https://www.estenoesmidominio.com
+	Num line: 22 	URL: https://www.youtube.org
