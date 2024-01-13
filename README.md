@@ -75,7 +75,7 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 1. Nos dirigiremos al directorio en el que queramos clonar el repositorio
 2. Abrimos la terminal en ese directorio
 3. Ejecutamos `git clone https://github.com/Arzenin/Analizador-Lexico.git`
-4. Ejecutamos `ls` y debería de haber aparecido un nuevo directorio llamado `/Analizador-Lexico
+4. Ejecutamos `ls` y debería de haber aparecido un nuevo directorio llamado `/Analizador-Lexico`
 
 [Volver al índice](#índice)
 
