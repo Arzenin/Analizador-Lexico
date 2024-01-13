@@ -52,12 +52,6 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
 %}
 
 %%
-\n                      {numline++;}
-
-[ ]                     {numword++;}
-
-.                       {numchar++;}
-
 {ip_inseguro}           {numurl++;numipv4++;numprotocolo_inseguro++;
                         char numer[50]; 
                         sprintf(numer, "Num line: %d \tIP:  ",numline);
@@ -97,6 +91,12 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
                         strcat(dom_s,numer);
                         strcat(dom_s,yytext);
                         }
+
+\n                      {numline++;}
+
+[ ]                     {numword++;}
+
+.                       {numchar++;}
 
 %%
 
