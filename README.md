@@ -37,6 +37,7 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
       1. [Declaraciones y Definiciones](#511-declaraciones-y-definiciones)
       2. [Acciones](#512-acciones)
       3. [Main](#513-main)
+      4. [Código completo](#514-código-completo)
    3. [Estructura del Test](#52-explicación-del-test)
    4. [Estructura del Resultado](#53-explicación-del-resultado)
    5. [Ejeccución del Código](#54-ejecución-del-código)
@@ -74,7 +75,7 @@ Al igual que con las URL debe de tener el protocolo HTTP o HTTPS, se busca tanto
 número negativo.
 
 ## 2.3 Aclaraciones Finales 
-Para una mayor sencillez a la hora de comprensión se aceptará que la IP o URL este entre palabras, es decir que si pusiesemos __*Hola12.12.12.3Chao*__ nos extraería la IP 12.12.12.3 , el motivo de esto es
+Para una mayor sencillez a la hora de comprensión se aceptará que la IP o URL este entre palabras, es decir que si pusiesemos __*Holahttp://12.12.12.3Chao*__ nos extraería ttp://12.12.12.3 , el motivo de esto es
 una mejor presentación a la hora de obtener el prompt de salida de forma más clara y concisa, ya que, como veremos más adelante, el __Analizador clasificara tanto las IP como las URL de forma ordenada y nos las devolverá posteriormente__, sin embargo a la hora de [explicar el código](#explicación-del-código) se nos indicarán las modificaciones pertinentes en caso de querer hacer que únicamente nos detectase las IP y URL exactas, es decir o bien estando entre palabras,singnos de puntuación, comienzo de la línea y final de la linea. 
 
 
@@ -187,35 +188,557 @@ ip_inseguro             {protocolo_inseguro}{ipv4}
     char* dom_s = NULL;
     char* dom_u = NULL;
 
+    void elimina_car_sobrantes(char* vector_car){
+        int longitud = strlen(vector_car);
+        if(vector_car[0]==' '||vector_car[0]=='\n'||vector_car[0]=='.'|vector_car[0]==','|vector_car[0]=='\b'){
+            if(vector_car[0]=='\n'){
+                numline++;
+            }
+            else if(vector_car[0]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[i] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+            longitud = longitud-1;
+        }
+        if(vector_car[longitud-1]==' '||vector_car[longitud-1]=='\n'||vector_car[longitud-1]=='.'|vector_car[longitud-1]==','|vector_car[longitud-1]=='\b'){
+            if(vector_car[longitud-1]=='\n'){
+                numline++;
+            }
+            else if(vector_car[longitud-1]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[longitud-1] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+        }
+    }
 %}
 ```
-Para comenzar nos centraremos en las 2 primeras líneas:
+Para comenzar nos centraremos en las 5 primeras líneas:
 ```c
 protocolo_inseguro      ("http://")
 protocolo_seguro        ("https://")
+dominio                 (("www"\.)?[a-zA-Z]+[\.]("com"|"es"|"org"|"net"|"edu"|"gov"))
+s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+ipv4                    ({s_ipv4}\.{s_ipv4}\.{s_ipv4}\.{s_ipv4})
 ```
 
-Estas dos líneas establecen las reglas para la correcta detección de los protocolos HTTP y HTTPS para así poder llevar a cabo su correcta detección.
+Estas dos líneas establecen las reglas para la correcta detección de los protocolos HTTP y HTTPS para así poder
+llevar a cabo su correcta detección, tras esto estableceremos en la tercera línea lo que es un dominio, de aquí
+podemos destacar la sección 
+`(("www"\.)?)` la cual nos permite la __opcionalidad del subdominio__, tras el cual será necesario como mínimo
+proporcionar __una palabra de al menos 1 letra__ tras esto deberá de seguir el dominio de primer nivel de las
+opciones que hemos 
+proporcionado.
+
+
+De la línea 4 nos sirve para definir que los números correctos de una IP son del número 0 al 255 y en la línea 5 
+indicamos el formato de IPV4, es decir `***.***.***.***` Siendo `***` un número de no más de 3 dígitos inferior a 
+255.
+
+
+Tras esto deberemos de definir el formato de protocolo e IP o URL unidos, y dependiendo del tipo de protocolo 
+clasificarlo de una forma o de otra, esto se hace en las líneas 6,7,8 y 9:
+```c
+ip_seguro               {protocolo_seguro}{ipv4}
+url_dominio_seguro      {protocolo_seguro}{dominio}
+url_dominio_inseguro    {protocolo_inseguro}{dominio}
+ip_inseguro             {protocolo_inseguro}{ipv4}
+```
+En las líneas 6 y 9 definimos la clasificación de las IP dependiendo del protocolo que lleven previamente y en las
+líneas 7 y 8 lo mismo pero con las URL.
+
+
+Hay algo de importancia que se debe de mencionar sobre estas líneas, en el analzador léxico que se ha realizado para 
+esta práctica lo que se busca es la correcta detección del patrón y la correcta clasificación, siendo esta segunda
+característica la de mayor importancia, sin embargo si lo que se desease es que únicamente se acptase el patrón siendo
+este una palabra propia individual se deberían realizar las siguientes modificaciones en estas líneas:
 
 ```c
+ip_seguro               (^|\b|\n|[ \.\,]){protocolo_seguro}{ipv4}($|\b|\n|[ \.\,])
+url_dominio_seguro      (^|\b|\n|[ \.\,]){protocolo_seguro}{dominio}($|\b|\n|[ \.\,])
+url_dominio_inseguro    (^|\b|\n|[ \.\,]){protocolo_inseguro}{dominio}($|\b|\n|[ \.\,])
+ip_inseguro             (^|\b|\n|[ \.\,]){protocolo_inseguro}{ipv4}($|\b|\n|[ \.\,])
 ```
+Con este comando se nos permitiría aceptar estos patrones únicamente si o bien van a principio `^` o a final de línea 
+`$`, van seguidos de un salto de línea `\n`, un espacio en blanco al final de la línea, un punto, una coma `[ \.\,]` 
+y para finalizar un hueco entre palabras gracias a `\b`
+
+
+Antes de proseguir a las declaraciones y definiciones en C me gustaría hacer una aclaración, en caso de querer probar
+el supuesto anterior haría falta realizar un reordenado de reglas, tanto en la sección de acciones, como en la de 
+declaraciones y definiciones, esto a raíz de que cuando Flex puede entrar en conflcto en caso de que 2 patrones se
+cumplan simultáneamente, esto haría que se ejecutase únicamente la acción del patrón más general, por esto mismo,
+habría que plantearse tanto el reordenado, como la refinición y borrado de algunas acciones evitando así conflictos.
+
+
+Prosiguiendo con la explicación esta sería la sección de declaraciones y definiciones en C:
 ```c
+%{
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdbool.h>
+    int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
+    int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
+    char* ip_s = NULL;
+    char* ip_u = NULL;
+    char* dom_s = NULL;
+    char* dom_u = NULL;
+
+    void elimina_car_sobrantes(char* vector_car){
+        int longitud = strlen(vector_car);
+        if(vector_car[0]==' '||vector_car[0]=='\n'||vector_car[0]=='.'|vector_car[0]==','|vector_car[0]=='\b'){
+            if(vector_car[0]=='\n'){
+                numline++;
+            }
+            else if(vector_car[0]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[i] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+            longitud = longitud-1;
+        }
+        if(vector_car[longitud-1]==' '||vector_car[longitud-1]=='\n'||vector_car[longitud-1]=='.'|vector_car[longitud-1]==','|vector_car[longitud-1]=='\b'){
+            if(vector_car[longitud-1]=='\n'){
+                numline++;
+            }
+            else if(vector_car[longitud-1]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[longitud-1] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+        }
+    }
+%}
 ```
+
+
+Podemos observar la sección dedicada a importación de librerías, en el cual se incluyen librerías como string,h.Esta 
+nos aportará determinadas funciones que nos facilitarán el almacenado de ocurrencias dentro de vectores dinámicos 
+por medio de punteros:
 ```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 ```
+
+
+Tras esto encontaremos la declaración y definición de todos los contadores que nos permitirán llevar el número de 
+ocurrencias de cada clase para así, al finalizar el programa, mostrar el conteo de ocurrencias.
 ```c
+int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
+int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
 ```
+
+
+De la línea 18 a la 21 podremos observar la declaración de estos futuros vectores dinámicos, todos ellos nos 
+permitirán el poder almacenar las ocurrencias conforme se vayan detectando para así al finalizar el programa 
+mostrarlas por pantalla y en orden correctamente clasificadas:
 ```c
+char* ip_s = NULL;
+char* ip_u = NULL;
+char* dom_s = NULL;
+char* dom_u = NULL;
 ```
+
+La razón de que los vectores estén inicalizados a 0 es por que este bloque de código equivale a uno global en C.
+A raíz de esto no podremos inicializarlos hasta definir y declarar el `main()` ya que si no podríamos llegar a 
+tener problemas en lo que respecta a la gestión de la memoria durante la ejecución del programa.
+
+
+Para acabar esta sección completamente se debe de explicar la función `elimina_car_sobrantes`, esta no es necesaria
+para la ejecución del analizador léxico que he diseñado para esta práctica, sin embargo si que lo es en caso de querer
+hacer el caso de querer realizar las modificaciones para que únicamente se detecte la IP y la URL como una *"Palabra individual"*
+
+
+La necesidad de eliminar caracteres es que a la hora de la salida de los resultados obtenidos, en caso de no eliminar
+caracteres como los saltos de línea, espacios en blanco, puntos, comas... etc nos aparecerían dentro del fichero 
+[salida.txt](Result/salida.txt).
 ```c
+void elimina_car_sobrantes(char* vector_car){
+    int longitud = strlen(vector_car);
+    if(vector_car[0]==' '||vector_car[0]=='\n'||vector_car[0]=='.'|vector_car[0]==','|vector_car[0]=='\b'){
+        if(vector_car[0]=='\n'){
+            numline++;
+        }
+        else if(vector_car[0]==' '){
+            numword++;
+        }
+        for (int i = 0; i < longitud; i++) {
+            vector_car[i] = vector_car[i + 1];
+        }
+        vector_car[longitud-1]='\0';
+        longitud = longitud-1;
+    }
+    if(vector_car[longitud-1]==' '||vector_car[longitud-1]=='\n'||vector_car[longitud-1]=='.'|vector_car[longitud-1]==','|vector_car[longitud-1]=='\b'){
+        if(vector_car[longitud-1]=='\n'){
+            numline++;
+        }
+        else if(vector_car[longitud-1]==' '){
+            numword++;
+        }
+        for (int i = 0; i < longitud; i++) {
+            vector_car[longitud-1] = vector_car[i + 1];
+        }
+        vector_car[longitud-1]='\0';
+    }
+}
 ```
+Esta función recibirá como parámetro un vector, comprobará que el primer y el último caracter no sean ninguno de los
+mencionados anterior mente, en caso de ser así, borrara los caracteres correspondientes y redimensionará el vector 
+reasignando el '\0' a su nuevo lugar.
+
+
+Por último la razón de que se aumenten los contadores de salto de línea y de espacios en blanco, es por que por los 
+problemas generados por el choque de reglas puede que el conteo de algunos espacios en blanco o saltos de línea se 
+pierdan
+
+
+[Volver al índice](#0-índice)
+
+### 5.1.2 Acciones
+En la siguiente sección del código se definen las __acciones que se realizarán al momento de encontrar un patrón__ 
+__complejo__ como puede ser el de __ip_seguro__ como el de patrones más __sencillos__ como los __saltos de línea__
+
+
+A continuación podemos observar el código de esta sección: 
 ```c
+%%
+{ip_inseguro}           {numurl++;numipv4++;numprotocolo_inseguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tIP:  ",numline);
+                        ip_u = realloc(ip_u,strlen(ip_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(ip_u,"\n");
+                        strcat(ip_u,"\t");
+                        strcat(ip_u,numer);
+                        strcat(ip_u,yytext);
+                        }
+
+{ip_seguro}             {numurl++;numipv4++;numprotocolo_seguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tIP:  ", numline);
+                        ip_s = realloc(ip_s,strlen(ip_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(ip_s,"\n");
+                        strcat(ip_s,"\t");
+                        strcat(ip_s,numer);
+                        strcat(ip_s,yytext);
+                        }
+
+{url_dominio_inseguro}  {numurl++;numdominio++;numprotocolo_inseguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tURL: ", numline);
+                        dom_u = realloc(dom_u,strlen(dom_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(dom_u,"\n");
+                        strcat(dom_u,"\t");
+                        strcat(dom_u,numer);
+                        strcat(dom_u,yytext);
+                        }
+
+{url_dominio_seguro}    {numurl++;numdominio++;numprotocolo_seguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tURL: ", numline);
+                        dom_s = realloc(dom_s,strlen(dom_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(dom_s,"\n");
+                        strcat(dom_s,"\t");
+                        strcat(dom_s,numer);
+                        strcat(dom_s,yytext);
+                        }
+
+\n                      {numline++;}
+
+[ ]                     {numword++;}
+
+.                       {numchar++;}
+
+%%
 ```
+Al igual que en el anterior apartado, se explicará sección por sección el código para su mejor comprensión.
+
+
+De la línea 54 a la 92 se definen las acciones de mayor complejitud, siendo estas las que se realizarán cuando se
+encuentre un patrón complejo dentro de la entrada recibida por el analizador.En este caso únicamente será necesario
+explicar una de las cuatro acciones ya que en estructura y funciones son prácticamente idénticas, dado que, la función
+de estas acciones se centra más en clasificar que en realizar acciones dentro del código.
+
+
+Para este caso explicaremos la acción de `ip_inseguro` siendo esta la encargada de detectar IP con protocolo HTTP:
 ```c
+{ip_inseguro}           {numurl++;numipv4++;numprotocolo_inseguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tIP:  ",numline);
+                        ip_u = realloc(ip_u,strlen(ip_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(ip_u,"\n");
+                        strcat(ip_u,"\t");
+                        strcat(ip_u,numer);
+                        strcat(ip_u,yytext);
+                        }
 ```
+Estas líneas corresponden a las líneas de la 54 a la 62, las acciones que se realizan son las siguientes:
+1. Se aumentan los contadores pertinentes dependiendo de los requisitos que cumpla la regla
+2. Generamos un vector estático auxiliar para almacenar una cabecera que se mostrará previa a la IP/URL
+3. Insertamos la cabezera que nos indicará el número de línea donde encontrar la IP/URL en el vector estático
+4. Aumentamos el tamaño del vector donde se almacenan todas las ocurrecias de esa regla tanto como sea neceario
+5. En las dos siguientes línea insertamos un `\n` y `\t` al vector dinámico para fonmatear la salida
+6. Insertamos la cabecera que nos indica el número de línea en el vector dinámico
+7. Por último añadimos al vector dinámico la ocurrencia que hemos encontrado correspondiente a la regla
+
+
+Por último me gustaría destacar que en caso de querere llevar a cabo el suspuesto que hemos mencionado ya varias
+veces se debería de insertar previo al comando `ip_u = realloc(Parámetros);` una llamada a la función 
+`elimina_car_sobrantes` a la cual le pasemos como parámetro el vector `yytext` el cual en ese caso contendría la 
+ocurrencia en forma bruta de la regla sobre la que se esta llevando a cabo la acción.
+
+
+Tras esto vamos a explicar las últimas líneas de sección de este código dedicadas al conteo de palabras, líneas
+y caractéres:
 ```c
+\n                      {numline++;}
+
+[ ]                     {numword++;}
+
+.                       {numchar++;}
 ```
+1. En la primera línea al detectar el salto de línea se aumentaría el número de línea *(El cual esta incializado a 1)*
+2. En la segunda línea se contarían los espacios en blanco contando así las palabras que hay en el texto.
+   1. Quiero destacar que esto sería dando por sentado que el usuario va a ser honesto y no va a poner más de 2 espacios seguidos, en caso de que no se honesto en vez de `[ ]` deberemos poner `\b`
+3. Por último contaremos cada uno de los caracteres para así devolver el número total de los mismos.
+
+
+[Volver al índice](#0-índice)
+
+### 5.1.3 Main
+Esta sería la última sección dentro de la explicación del código fuente, como menciona el título de la sección es la
+que explicaría el repertorio de acciones que realizará el main:
 ```c
+int main(){
+    ip_u = realloc(ip_u,1);
+    ip_s = realloc(ip_s,1);
+    dom_u = realloc(dom_u,1);
+    dom_s = realloc(dom_s,1);
+
+    yylex();
+    printf("Analisis del Prompt Introducido:\nNum lineas:%d\tNum Palabras:%d\tNum Caracteres:%d\n",
+    numline,numword,numchar);
+    printf("Num URL/IP: %d\nNum Protocolo HTTP: %d\tNum Protocolo HTTPS: %d\tNum IPV4: %d\tNum URL: %d\n",
+    numurl,numprotocolo_inseguro,numprotocolo_seguro,numipv4,numdominio);
+    if(dom_u!=" "||ip_u!=" "){
+        printf("\nURL e IP con protocolo HTTP:\n%s%s\n",dom_u,ip_u);
+    }
+    if(dom_s!=" "||ip_s!=" "){
+        printf("\nURL e IP con protocolo HTTPS:\n%s%s\n",dom_s,ip_s);
+        
+    }
+    if(ip_u!=" "||ip_s!=" "){
+        printf("\nDIRECCION IP:\n%s%s\n",ip_u,ip_s);
+    }
+    if(dom_u!=" "||dom_s!=" "){
+        printf("\nDIRECCION URL:\n%s%s\n",dom_u,dom_s);
+    }
+    
+    free(ip_u);
+    free(ip_s);
+    free(dom_u);
+    free(dom_s);
+
+    return 1;
+    }
+```
+Dentro de este código podemos identificar __*3 secciones__*, __*la primera*__ de la línea 103 a la 109 que serían las 
+encargadas de la __definición inicial de los vectores dinámicos__, ya que como se mencionó anteriormente los vectores
+dinámicos no pueden incializarse en un contexto global. Además de esto la línea 109 sería la encargada de la 
+ejecución del analizador léxico.
+```c
+  ip_u = realloc(ip_u,1);
+  ip_s = realloc(ip_s,1);
+  dom_u = realloc(dom_u,1);
+  dom_s = realloc(dom_s,1);
+
+  yylex();
+```
+__*La segunda*__ sección sería la encargada de __devolver la salida__ o bien al fichero de salida o bien a la terminal desde la que estemos ejecutando el código.
+
+```c
+printf("Analisis del Prompt Introducido:\nNum lineas:%d\tNum Palabras:%d\tNum Caracteres:%d\n",
+numline,numword,numchar);
+printf("Num URL/IP: %d\nNum Protocolo HTTP: %d\tNum Protocolo HTTPS: %d\tNum IPV4: %d\tNum URL: %d\n",
+numurl,numprotocolo_inseguro,numprotocolo_seguro,numipv4,numdominio);
+if(dom_u!=" "||ip_u!=" "){
+    printf("\nURL e IP con protocolo HTTP:\n%s%s\n",dom_u,ip_u);
+}
+if(dom_s!=" "||ip_s!=" "){
+    printf("\nURL e IP con protocolo HTTPS:\n%s%s\n",dom_s,ip_s);
+    
+}
+if(ip_u!=" "||ip_s!=" "){
+    printf("\nDIRECCION IP:\n%s%s\n",ip_u,ip_s);
+}
+if(dom_u!=" "||dom_s!=" "){
+    printf("\nDIRECCION URL:\n%s%s\n",dom_u,dom_s);
+}
+```
+Los dos primeros `printf()` sirven para mostrar el conteo de datos obtenido siendo estas de la línea 110 a la 113,
+tras esto se comenzaría a imprimir los vectores los cuales contengan como mínimo una ocurrencia, por eso las líneas 
+`if(VECTOR != VACÍO)` que corresponden de la línea 114 a la 126.
+
+Por __último la tercera__ y última sección corresponden a la __liberación de los recursos__ de los vectores dinámicos
+y `return 1`
+```c
+free(ip_u);
+free(ip_s);
+free(dom_u);
+free(dom_s);
+
+return 1;  
+```
+
+### 5.1.4 Código completo
+En esta sección se mostrará el código fuente del fichero [AnalizadorLexico](Src/AnalizadorLexico) que podremos 
+obtener en el directorio [Src](Src/)
+
+```c
+protocolo_seguro        ("https://")
+protocolo_inseguro      ("http://")
+dominio                 (("www"\.)?[a-zA-Z]+[\.]("com"|"es"|"org"|"net"|"edu"|"gov"))
+s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+ipv4                    ({s_ipv4}\.{s_ipv4}\.{s_ipv4}\.{s_ipv4})
+ip_seguro               {protocolo_seguro}{ipv4}
+url_dominio_seguro      {protocolo_seguro}{dominio}
+url_dominio_inseguro    {protocolo_inseguro}{dominio}
+ip_inseguro             {protocolo_inseguro}{ipv4}
+
+
+%{
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
+    int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
+    char* ip_s = NULL;
+    char* ip_u = NULL;
+    char* dom_s = NULL;
+    char* dom_u = NULL;
+
+    void elimina_car_sobrantes(char* vector_car){
+        int longitud = strlen(vector_car);
+        if(vector_car[0]==' '||vector_car[0]=='\n'||vector_car[0]=='.'|vector_car[0]==','|vector_car[0]=='\b'){
+            if(vector_car[0]=='\n'){
+                numline++;
+            }
+            else if(vector_car[0]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[i] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+            longitud = longitud-1;
+        }
+        if(vector_car[longitud-1]==' '||vector_car[longitud-1]=='\n'||vector_car[longitud-1]=='.'|vector_car[longitud-1]==','|vector_car[longitud-1]=='\b'){
+            if(vector_car[longitud-1]=='\n'){
+                numline++;
+            }
+            else if(vector_car[longitud-1]==' '){
+                numword++;
+            }
+            for (int i = 0; i < longitud; i++) {
+                vector_car[longitud-1] = vector_car[i + 1];
+            }
+            vector_car[longitud-1]='\0';
+        }
+    }
+%}
+
+%%
+{ip_inseguro}           {numurl++;numipv4++;numprotocolo_inseguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tIP:  ",numline);
+                        ip_u = realloc(ip_u,strlen(ip_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(ip_u,"\n");
+                        strcat(ip_u,"\t");
+                        strcat(ip_u,numer);
+                        strcat(ip_u,yytext);
+                        }
+
+{ip_seguro}             {numurl++;numipv4++;numprotocolo_seguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tIP:  ", numline);
+                        ip_s = realloc(ip_s,strlen(ip_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(ip_s,"\n");
+                        strcat(ip_s,"\t");
+                        strcat(ip_s,numer);
+                        strcat(ip_s,yytext);
+                        }
+
+{url_dominio_inseguro}  {numurl++;numdominio++;numprotocolo_inseguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tURL: ", numline);
+                        dom_u = realloc(dom_u,strlen(dom_u) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(dom_u,"\n");
+                        strcat(dom_u,"\t");
+                        strcat(dom_u,numer);
+                        strcat(dom_u,yytext);
+                        }
+
+{url_dominio_seguro}    {numurl++;numdominio++;numprotocolo_seguro++;
+                        char numer[50]; 
+                        sprintf(numer, "Num line: %d \tURL: ", numline);
+                        dom_s = realloc(dom_s,strlen(dom_s) + strlen(yytext) + strlen((char*)numer) + 3);
+                        strcat(dom_s,"\n");
+                        strcat(dom_s,"\t");
+                        strcat(dom_s,numer);
+                        strcat(dom_s,yytext);
+                        }
+
+\n                      {numline++;}
+
+[ ]                     {numword++;}
+
+.                       {numchar++;}
+
+%%
+
+
+int main(){
+    ip_u = realloc(ip_u,1);
+    ip_s = realloc(ip_s,1);
+    dom_u = realloc(dom_u,1);
+    dom_s = realloc(dom_s,1);
+
+    yylex();
+    printf("Analisis del Prompt Introducido:\nNum lineas:%d\tNum Palabras:%d\tNum Caracteres:%d\n",
+    numline,numword,numchar);
+    printf("Num URL/IP: %d\nNum Protocolo HTTP: %d\tNum Protocolo HTTPS: %d\tNum IPV4: %d\tNum URL: %d\n",
+    numurl,numprotocolo_inseguro,numprotocolo_seguro,numipv4,numdominio);
+    if(dom_u!=" "||ip_u!=" "){
+        printf("\nURL e IP con protocolo HTTP:\n%s%s\n",dom_u,ip_u);
+    }
+    if(dom_s!=" "||ip_s!=" "){
+        printf("\nURL e IP con protocolo HTTPS:\n%s%s\n",dom_s,ip_s);
+        
+    }
+    if(ip_u!=" "||ip_s!=" "){
+        printf("\nDIRECCION IP:\n%s%s\n",ip_u,ip_s);
+    }
+    if(dom_u!=" "||dom_s!=" "){
+        printf("\nDIRECCION URL:\n%s%s\n",dom_u,dom_s);
+    }
+    
+    free(ip_u);
+    free(ip_s);
+    free(dom_u);
+    free(dom_s);
+
+    return 1;
+    }
 ```
 ```c
 ```
