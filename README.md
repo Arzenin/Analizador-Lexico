@@ -28,7 +28,17 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
    1. [Gcc](#31-gcc)
    2. [Flex](#32-flex)
 4. [Explicación del Código](#explicación-del-código)
+# 2. Introducción y motivación 
+Este proyecto corresponde a la práctica 2 de la asignatura de MC, en ella se nos pide desarrollar un analizador léxico para el reconocimiento de los patrones que nosostros estimemos oportunos.
+En mi caso, he dicidido que este analizador de una entrada extraiga las URL y las IP del tipo IP4, las cuales si o si deben de tener o bien el protocolo HTTP o bien el HTTPS.Respecto al formato
+de las URL y las IP me gustaría realizar unas aclaraciones:
 
+## 2.1 URL
+Las URL que se detectan deben de tener previas a ellas el protocolo HTTP o HTTPS, sin embargo en este caso se deberá de admitir la __posibilidad__ de que tenga el __subdominio www__ , además de esto
+debe de admitir __distintos tipos de dominio de primer nivel__ y siempre deben de haber __almenos uno presente__
+
+## 2.2 IP
+Al igual que con las URL debe de tener el protocolo HTTP o HTTPS, sin embargo en este caso lo que se busca es __el formato correcto__, como tal en este caso no nos fijaremos en si la IP 
 # 2. Github
 En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta la descarga del propio material del repositorio
 
