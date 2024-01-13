@@ -1,6 +1,9 @@
 # Analizador-Lexico
 
-En este repositorio podremos encontrar el analizador léxico realizado para las practicas de la asignatura de MC.
+En este fichero podremos encontrar la documentación completa del proyecto llevado a cabo para la práctica 2 de MC.
+Realizar un Analizador Léxico, explicar el objetivo de dicho analizador, su funcionamiento.
+
+Para ello se ha realizado un repositorio en Github con el siguiente enlace: https://github.com/Arzenin/Analizador-Lexico
 
 # Autor:
 - Jose Manuel Aranda Gutiérrez
