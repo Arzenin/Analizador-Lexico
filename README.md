@@ -2,6 +2,11 @@
 
 En este repositorio podremos encontrar el analizador léxico realizado para las practicas de la asignatura de MC.
 
+# Autor:
+- Jose Manuel Aranda Gutiérres
+  - Correo electrónico: jomagtr@gmail.com
+  - Correo electrónico ugr: jomagtr@correo.ugr.es
+
 # 1. Índice
 
 1. [Índice](#1-índice)
