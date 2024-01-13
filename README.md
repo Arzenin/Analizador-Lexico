@@ -3,7 +3,7 @@
 En este repositorio podremos encontrar el analizador léxico realizado para las practicas de la asignatura de MC.
 
 # Autor:
-- Jose Manuel Aranda Gutiérres
+- Jose Manuel Aranda Gutiérrez
   - Correo electrónico: jomagtr@gmail.com
   - Correo electrónico ugr: jomagtr@correo.ugr.es
 
