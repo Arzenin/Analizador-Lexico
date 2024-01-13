@@ -163,11 +163,9 @@ Estas secciones se llaman respectivamente: [__Declaraciones y Definiciones__](#5
 ### 5.1.1 Declaraciones y Definiciones
 El código que podemos observar a continuación es el código completo de la sección, más adelante explicaremos línea por línea este código:
 
-
-
 ```c
 protocolo_inseguro      ("http://"|" http://")
-protocolo_seguro        ("https://"|" http://")
+protocolo_seguro        ("https://"|" https://")
 dominio                 (("www.")?[a-zA-Z\.]+\.("com"|"es"|"org"|"net"|"edu"|"gov"))
 ipv4                    ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})
 url_dominio_seguro      ({protocolo_seguro}{dominio})
@@ -188,6 +186,39 @@ ip_inseguro             ({protocolo_inseguro}{ipv4})
     
 %}
 ```
+Para comenzar nos centraremos en los 2 primeros comandos:
+```c
+protocolo_inseguro      ("http://"|" http://")
+protocolo_seguro        ("https://"|" http://")
+```
+Estos dos comandos estan de
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+```c
+```
+
 ## 5.2 Estructura del Test
 ## 5.3 Estructura del Resultado
 ## 5.4 Ejeccución del Código
