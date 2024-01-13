@@ -79,4 +79,30 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 
 [Volver al índice](#índice)
 
+
 ## Explicación del Código
+
+```c
+protocolo_inseguro      ("http://"|" http://")
+protocolo_seguro        ("https://"|" http://")
+dominio                 (("www.")?[a-zA-Z\.]+\.("com"|"es"|"org"|"net"|"edu"|"gov"))
+ipv4                    ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})
+url_dominio_seguro      ({protocolo_seguro}{dominio})
+url_dominio_inseguro    ({protocolo_inseguro}{dominio})
+ip_seguro               ({protocolo_seguro}{ipv4})
+ip_inseguro             ({protocolo_inseguro}{ipv4})
+
+%{
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
+    int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
+    char* ip_s = NULL;
+    char* ip_u = NULL;
+    char* dom_s = NULL;
+    char* dom_u = NULL;
+    
+%}
+
+```
