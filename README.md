@@ -32,7 +32,15 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
 4. [Instalación de la Herramienta](#4-instalación-de-la-herramienta)
    1. [Gcc](#41-gcc)
    2. [Flex](#42-flex)
-5. [Explicación del Código](#explicación-del-código)
+5. [Explicación del Código](#5-explicación-del-código)
+   1. [Explicación del Código Fuente](#51-explicación-del-código-fuente)
+      1. [Declaraciones y Definiciones](#511-declaraciones-y-definiciones)
+      2. [Acciones](#512-acciones)
+      3. [Main](#513-main)
+   3. [Estructura del Test](#52-explicación-del-test)
+   4. [Estructura del Resultado](#53-explicación-del-resultado)
+   5. [Ejeccución del Código](#54-ejecución-del-código)
+   
    
 # 1. Introducción y motivación 
 Este proyecto corresponde a la práctica 2 de la asignatura de MC, en ella se nos pide desarrollar un analizador léxico para el reconocimiento de los patrones que nosostros estimemos oportunos.
@@ -41,11 +49,20 @@ En mi caso, he dicidido que este analizador de una entrada extraiga las URL y la
 
 Respecto a mis motivos a la hora de la elección de este tipo de analizador léxico vienen dado por varios proyectos y cursos que he realizado a lo largo del año. El proyecto en cuestión fue el 
 montaje de un servidor casero, durante la configuración del mismo, debía de conectarme por medio de `ssh` al servidor, sin embargo perdía mucho tiempo buscando la sección de IP dentro de mi router.
-Esto me hizo pensar en lo práctico que habría sido tener un programa capaz de extraer del fichero todas las IP y decirme exactamente en que línea se encuentan.Por otro lado la detección de URL viene
-dado por diversos cursos que he hecho los cuales me han hecho darme cuenta lo útil que sería obtener un Analizador léxico que te permitiese extraer un URL y clasificarla dependiendo del dominio al
-que pertenezca, esto último no es uno de los objetivos que realizaré en esta práctica, sin embargo utilizaré esto como base para expandir el programa que desarrolle.
+Esto me hizo pensar en lo práctico que habría sido tener un programa capaz de extraer del fichero todas las IP y decirme exactamente en que línea se encuentan.
+
+Por otro lado la detección de URL viene dado por diversos cursos que he hecho los cuales me han hecho darme cuenta lo útil que sería obtener un Analizador léxico 
+que te permitiese extraer un URL y clasificarla dependiendo del dominio al que pertenezca, esto último no es uno de los objetivos que realizaré en esta práctica, 
+sin embargo utilizaré esto como base para expandir el programa que desarrolle.
+
+
+[Volver al índice](#0-índice)
 
 # 2. Objetivos
+En esta sección se explicarán los objetivos de la práctica, es decir el patrón que se debe detectar exactamente dentro del texto al ejecutar el analizador léxico, para ello especificaremos
+que debe de encontar tanto en __*URL*__ como en __*IP*__ y tras esto se realizarán __*algunas aclaraciones finales*__ de el por qué de algunas decisiones tomadas a la hora de la elección de 
+objetivos.
+
 
 ## 2.1 URL
 Las URL que se detectan deben de tener previas a ellas el protocolo HTTP o HTTPS, sin embargo en este caso se deberá de admitir la __posibilidad__ de que tenga el __subdominio www__ , además de esto
@@ -59,6 +76,10 @@ número negativo.
 ## 2.3 Aclaraciones Finales 
 Para una mayor sencillez a la hora de comprensión se aceptará que la IP o URL este entre palabras, es decir que si pusiesemos __*Hola12.12.12.3Chao*__ nos extraería la IP 12.12.12.3 , el motivo de esto es
 una mejor presentación a la hora de obtener el prompt de salida de forma más clara y concisa, ya que, como veremos más adelante, el __Analizador clasificara tanto las IP como las URL de forma ordenada y nos las devolverá posteriormente__, sin embargo a la hora de [explicar el código](#explicación-del-código) se nos indicarán las modificaciones pertinentes en caso de querer hacer que únicamente nos detectase las IP y URL exactas, es decir o bien estando entre palabras,singnos de puntuación, comienzo de la línea y final de la linea. 
+
+
+[Volver al índice](#0-índice)
+
 
 # 3. Github
 En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta la descarga del propio material del repositorio
@@ -86,8 +107,6 @@ En el directorio result se almacena una muestra del resultado que deberíamos de
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
 
-[Volver al Índice](#0-índice)
-
 ## 3.2 Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
 
@@ -104,6 +123,7 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 2. Abrimos la terminal en ese directorio
 3. Ejecutamos `git clone https://github.com/Arzenin/Analizador-Lexico.git`
 4. Ejecutamos `ls` y debería de haber aparecido un nuevo directorio llamado `/Analizador-Lexico`
+
 
 [Volver al índice](#0-índice)
 
@@ -126,7 +146,24 @@ En este caso explicaré la instalación de las herramientas en el entorno de pro
 
 [Volver al índice](#0-índice)
 
-## Explicación del Código
+# 5. Explicación del Código
+Una vez explicado tanto donde encontar cada uno de los materiales, pasando por la obtención de los mismos y para finalizar la instalación de programas y dependencias necesarias a la hora de ejecutar el 
+analizador léxico, podemos comenzar con la explicación del código.+
+
+Esta sección la dividiremos en 4 apartados estando el primero más centrado en la __*explicación del código fuente*__, el segundo en la __*comprensión del fichero que recibiremos como entrada*__, el tercero 
+__*como nos devolverá los datos el programa*__ , y para finalizar aprenderemos los comandos pertinentes para __*ejecutar el programa*__
+
+## 5.1 Explicación del Código Fuente
+El código fuente del analizador léxico se ubica en el archivo __*[Analizador Léxico](Src/AnalizadorLexico)*__, este archivo se subdivide en 3 partes, la primera dedicada a declaraciones y definiciones de reglas del analizador y variables globales en C, la segunda dedicada a las acciones que se deben de realizar una vez se encuentre una ocurrencia y la última dedicada al main en el cual se inicializan 
+algunas variables dinámicas que no se pueden inicializar en entornos globales y al formato de los datos de cara a la salida.
+
+Estas secciones se llaman respectivamente: [__Declaraciones y Definiciones__](#511-declaraciones-y-definiciones) [__Acciones__](#512-acciones) [__Main__](#513-main)
+
+
+### 5.1.1 Declaraciones y Definiciones
+El código que podemos observar a continuación es el código completo de la sección, más adelante explicaremos línea por línea este código:
+
+
 
 ```c
 protocolo_inseguro      ("http://"|" http://")
@@ -150,5 +187,7 @@ ip_inseguro             ({protocolo_inseguro}{ipv4})
     char* dom_u = NULL;
     
 %}
-
 ```
+## 5.2 Estructura del Test
+## 5.3 Estructura del Resultado
+## 5.4 Ejeccución del Código
