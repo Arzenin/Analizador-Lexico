@@ -35,10 +35,16 @@ de las URL y las IP me gustaría realizar unas aclaraciones:
 
 ## 2.1 URL
 Las URL que se detectan deben de tener previas a ellas el protocolo HTTP o HTTPS, sin embargo en este caso se deberá de admitir la __posibilidad__ de que tenga el __subdominio www__ , además de esto
-debe de admitir __distintos tipos de dominio de primer nivel__ y siempre deben de haber __almenos uno presente__
+debe de admitir __distintos tipos de dominio de primer nivel__ y siempre deben de haber __almenos uno presente__ , los TLP que admitiría son:
+__*.com*__  __*.es*__  __*.org*__  __*.net*__  __*.edu*__  __*.gov*__
+
+Además en esto solo se admitirá una URL que vaya: entre espacios, a principio o al final de la misma final , es decir que la IP __*hola12.23.22.33chao no sería válida y no se extraería*__ mientras que si es __*hola 12.23.22.33 chao*__ la detectaría sin ningún problema.
 
 ## 2.2 IP
-Al igual que con las URL debe de tener el protocolo HTTP o HTTPS, sin embargo en este caso lo que se busca es __el formato correcto__, como tal en este caso no nos fijaremos en si la IP 
+Al igual que con las URL debe de tener el protocolo HTTP o HTTPS, se busca tanto __el formato correcto__, como que sea una __IP válida__ es decir que ninguno de sus campos puedes ser mayor a 255 ni un 
+número negativo, además en esto solo se admitirá una ip que vaya entre espacios, es decir que la IP __*hola12.23.22.33chao no sería válida y no se extraería*__ mientras que si es __*hola 12.23.22.33 chao*__
+la detectaría sin ningún problema.
+
 # 2. Github
 En este apartado se os explicaría en profundidad todos y cada uno de los apartados relacionados con el repositorio de github, desde la estructura hasta la descarga del propio material del repositorio
 
