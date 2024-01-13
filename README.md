@@ -23,9 +23,9 @@ __Se recomienda__ la visualización de la documentación desde el README.md en e
    3. [Aclaraciones Finales](#23-aclaraciones-finales)
 3. [Github](#3-github)
    1. [Estructura del Repositorio](#31-estructura-del-repositorio)
-      1. [Src](Src/#311src)
-      2. [Test](Test/#312test)
-      3. [Result](Result/#313result)
+      1. [Src](#311src)
+      2. [Test](#312test)
+      3. [Result](#313result)
    2. [Descarga del Repositorio](#32-descarga-del-repositorio)
       1. [Instalación de Git](#321-instalación-de-git)
       2. [Clonar un Repositorio](#322-clonar-un-repositorio)
@@ -90,20 +90,20 @@ En este apartado se os explicaría en profundidad todos y cada uno de los aparta
 El repositorio esta compuesto por 3 directorios:
 
 ### 3.1.1 Src
-Este directorio contiene en si el analizador léxico por el cual obtendremos los requisitos explicados en la sección anterior, el nombre del archivo es [AnalizadorLexico](Src/AnalizadorLexico)
+En el directorio __[Src](Src/)__ encontraremos el analizador léxico por el cual obtendremos los requisitos explicados en la sección anterior, el nombre del archivo es [AnalizadorLexico](Src/AnalizadorLexico)
 
 Más adelante en el apartado [explicación del código](#explicación-del-código) se explicará en mayor profundidad el funcionamiento del mismo
 
 
 ### 3.1.2 Test
-En este directorio podremos encontrar un fichero llamado [entrada.txt](Test/entrada.txt) por el cual podremos comprobar el correcto funcionamiento del programa.
+En el directorio __[Test](Test/)__ encontraremos podremos encontrar un fichero llamado [entrada.txt](Test/entrada.txt) por el cual podremos comprobar el correcto funcionamiento del programa.
 
 
 __Se recomienda encarecidamente su lectura__ ya que al final de este se nos indican los resultados esperados por parte del programa.
 
 
 ### 3.1.3 Result
-En el directorio result se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
+En el directorio __[Result](Result/)__se almacena una muestra del resultado que deberíamos de obtener en caso de ejecutar el [código](Src/AnalizadorLexico) utilizado el [archivo de entrada](Test/entrada.txt) proporcionado
 
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
@@ -600,6 +600,9 @@ free(dom_s);
 return 1;  
 ```
 
+
+[Volver al índice](#0-índice)
+
 ### 5.1.4 Código completo
 En esta sección se mostrará el código fuente del fichero [AnalizadorLexico](Src/AnalizadorLexico) que podremos 
 obtener en el directorio [Src](Src/)
@@ -740,6 +743,9 @@ int main(){
     return 1;
     }
 ```
+
+
+[Volver al índice](#0-índice)
 ```c
 ```
 ```c
