@@ -164,34 +164,39 @@ Estas secciones se llaman respectivamente: [__Declaraciones y Definiciones__](#5
 El código que podemos observar a continuación es el código completo de la sección, más adelante explicaremos línea por línea este código:
 
 ```c
-protocolo_inseguro      ("http://"|" http://")
-protocolo_seguro        ("https://"|" https://")
-dominio                 (("www.")?[a-zA-Z\.]+\.("com"|"es"|"org"|"net"|"edu"|"gov"))
-ipv4                    ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})
-url_dominio_seguro      ({protocolo_seguro}{dominio})
-url_dominio_inseguro    ({protocolo_inseguro}{dominio})
-ip_seguro               ({protocolo_seguro}{ipv4})
-ip_inseguro             ({protocolo_inseguro}{ipv4})
+protocolo_seguro        ("https://")
+protocolo_inseguro      ("http://")
+dominio                 (("www"\.)?[a-zA-Z]+[\.]("com"|"es"|"org"|"net"|"edu"|"gov"))
+s_ipv4                  (([0-1]?[0-9]?[0-9])|[2][0-4][0-9]|[2][5][0-5])
+ipv4                    ({s_ipv4}\.{s_ipv4}\.{s_ipv4}\.{s_ipv4})
+ip_seguro               {protocolo_seguro}{ipv4}
+url_dominio_seguro      {protocolo_seguro}{dominio}
+url_dominio_inseguro    {protocolo_inseguro}{dominio}
+ip_inseguro             {protocolo_inseguro}{ipv4}
+
 
 %{
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    #include <stdbool.h>
     int numurl=0,numprotocolo_inseguro=0,numline=1,numword=0;
     int numprotocolo_seguro=0,numdominio=0,numipv4=0,numchar=0;
     char* ip_s = NULL;
     char* ip_u = NULL;
     char* dom_s = NULL;
     char* dom_u = NULL;
-    
+
 %}
 ```
-Para comenzar nos centraremos en los 2 primeros comandos:
+Para comenzar nos centraremos en las 2 primeras líneas:
 ```c
-protocolo_inseguro      ("http://"|" http://")
-protocolo_seguro        ("https://"|" http://")
+protocolo_inseguro      ("http://")
+protocolo_seguro        ("https://")
 ```
-Estos dos comandos estan de
+
+Estas dos líneas establecen las reglas para la correcta detección de los protocolos HTTP y HTTPS para así poder llevar a cabo su correcta detección.
+
 ```c
 ```
 ```c
