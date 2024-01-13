@@ -55,7 +55,7 @@ En el directorio result se almacena una muestra del resultado que deberíamos de
 Este directorio nos será de gran utilidad para poder comprender el formato de la salida que obtendremos previa a la ejecución del analizador léxico
 
 
-[Volver al Índice](#índice)
+[Volver al Índice](#1-índice)
 
 ## 2.2 Descarga del Repositorio
 En este apartado se enseñara al usuario a descargar todos los recursos necesarios del repositorio por medio de la [instalación de github](#instalación-de-git) y la [clonación de un repositorio](clonar-un-repositorio) en la máquina desde la que queramos ejecutar el analizador.
@@ -74,7 +74,7 @@ Una vez instalado Git deberemos de crear un directorio personalmente recomiendo 
 3. Ejecutamos `git clone https://github.com/Arzenin/Analizador-Lexico.git`
 4. Ejecutamos `ls` y debería de haber aparecido un nuevo directorio llamado `/Analizador-Lexico`
 
-[Volver al índice](#índice)
+[Volver al índice](#1-índice)
 
 # 3. Instalación de la Herramienta
 
@@ -93,7 +93,7 @@ En este caso explicaré la instalación de las herramientas en el entorno de pro
 4. Ejecuratemos `flex --version` pasa asegurarnos de que todo se ha instalado correctamente
 
 
-[Volver al índice](#índice)
+[Volver al índice](#1-índice)
 
 ## Explicación del Código
 
